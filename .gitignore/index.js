@@ -114,5 +114,5 @@ bot.on('message', message => {
     }
 })
 
-bot.login('')
+bot.login(process.env.BOT_TOKEN)
 
