@@ -114,5 +114,5 @@ bot.on('message', message => {
     }
 })
 
-bot.login('NDgxMTc5NDI2NDIwNDI0NzU0.Dlyl_g.IYU8zUFAdP1UpxZo4l74gws6iQQ')
+bot.login('')
 
