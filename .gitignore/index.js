@@ -20,9 +20,6 @@ bot.on('ready', function(){
     .catch(console.error)
 })
 
-bot.on('guildMemberAdd', member => {
-    member.guild.channels.find("name", "481176846797635599").send(`Bienvenue sur le Discord de Zexion ${member.user.username} !`)
-})
 
 bot.on('message', function(message) {
     if (message.content == '!ping') {
@@ -92,6 +89,66 @@ bot.on('message', message => {
             .catch(console.error);
         }
 
+        function blague(max) {
+            var nombre = Math.floor(Math.random() * (max - 1 + 1)) + 1
+            switch (nombre) {
+                case '0':
+                message.channel.send(`Méfiez vous de l’oiseau sur le lac :\nC’est peut-être un mauvais cygne !`)
+                break;
+                case 1:
+                    message.channel.send(`Les girafes, ça n'existe pas...\nNormal, c'est un cou monté !`)
+                    break;
+                case 2:
+                    message.channel.send(`Qui est-ce qui court et qui se jette ?\nUne courgette.`)
+                    break;
+                case 3:
+                    message.channel.send(`Tu connais la blague de la chaise?\nElle est pliante.`)
+                    break;
+                case 4:
+                    message.channel.send(`C'est un gars qui rentre dans un café et plouf !`)
+                    break;
+                case 5:
+                    message.channel.send(`C'est l'histoire du ptit dej, vous la connaissez ?\nPas de bol.`)
+                    break;
+                case 6:
+                    message.channel.send(`Qu'est ce qui fait toin toin ?\nUn tanard`)
+                    break;
+                default:
+                  message.channel.send(`Je ne connais pas de bonnes blagues`)
+                    break;
+            }
+           
+        }
+
+        if (splitMessage[0] === '!zexionbot') {
+            let Fondateur = message.guild.roles.find("name", "Fondateur")
+            if(splitMessage.length === 2){
+                switch (splitMessage[1]) {
+                    case 'fils':
+                    if(message.member.roles.has(Fondateur.id)){
+                        message.channel.send('Papa ! :hearts:')
+                    } else { message.channel.send("Vous n'avez pas la permission de m'adresser la parole.") }
+                        break;
+                    case 'salut':
+                        message.reply('Salut !')
+                        break;
+                    case 'tg':
+                        message.channel.send(`Hey <@&481182702112997376> ! ${message.author.toString()} a manqué de respect !`)
+                        break;
+                    case 'fdp':
+                        message.channel.send(`Hey <@&481182702112997376> ! ${message.author.toString()} a manqué de respect !`)
+                        break;
+                    case 'blague':
+                        blague(5);
+                    break;
+                    default:
+                    message.channel.send('Euh.. Je ne peux pas aider')
+                        break;
+                }
+            } else {
+                message.channel.send('Euh.. Je ne peux pas aider')
+            }
+        }
 
         if (splitMessage[0] === '!lien') {
             if(splitMessage.length === 2){
