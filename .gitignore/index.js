@@ -10,6 +10,10 @@ function sendError(message, description){
     }})
 }
 
+
+
+
+
 bot.on('ready', function(){
     bot.user.setAvatar('./avatar.png')
     .then(() => console.log('Avatar mis avec succès'))
@@ -29,6 +33,7 @@ bot.on('message', function(message) {
 
 
 bot.on('message', message => {
+    if (message.author.bot) return;
     if (message.content[0] === PREFIX) {
     let splitMessage = message.content.split(" ")
     if (splitMessage[0] === '!commandes') {
@@ -53,7 +58,7 @@ bot.on('message', message => {
               },
               {
                 name: "!staff",
-                value: "Alerte les membres du staff et vous déplaces dans le channel adapté."
+                value: "Alerte les membres du staff et vous déplaces dans le channel adapté (si vous vous trouvez déjà dans un channel vocal)."
               }
             ]
         }});
@@ -74,24 +79,19 @@ bot.on('message', message => {
             }
         }
 
-
+       
         if (splitMessage[0] === '!staff') {
-        const mem = message.mentions.members.first()
-        const chan = bot.channel.get("481189105401724958")
-            mem.setVoiceChannel(chan)
-            .then(() => console.log(`Moved ${mem.displayName} to ${chan}`))
-        .catch(console.error);
+            const chan = bot.channels.get('481189105401724958')
+            var user_id = message.author.id
+            var user = message.guild.members.find("id", user_id);
+
+            bot.channels.get('481178032518725667').send(`Hey <@&481182702112997376> ! ${message.author.toString()} a besoin d'aide !`)
+                       
+            user.setVoiceChannel(chan)
+            .then(() => console.log(`Moved  to ${chan}`))
+            .catch(console.error);
         }
 
-        exports.run = function(client, message) {
-
-            
-            if (splitMessage[0] === '!move') {
-              mem.setVoiceChannel(client.channels.get('481189105401724958'))
-                  .then(() => console.log(`Moved ${mem.displayName} to ${chan}`))
-              .catch(console.error);
-              }
-            }
 
         if (splitMessage[0] === '!lien') {
             if(splitMessage.length === 2){
@@ -113,6 +113,5 @@ bot.on('message', message => {
         }
     }
 })
-
 bot.login(process.env.BOT_TOKEN)
 
