@@ -15,6 +15,7 @@ function sendError(message, description){
 
 
 bot.on('ready', function(){
+    bot.user.setGame("Modération Discord Zexion");
     bot.user.setAvatar('./avatar.png')
     .then(() => console.log('Avatar mis avec succès'))
     .catch(console.error)
